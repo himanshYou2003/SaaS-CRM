@@ -1,0 +1,104 @@
+name: CI/CD — SaaS CRM
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Backend Tests ─────────────────────────────────────────────────────────
+  backend-test:
+    name: Laravel Tests
+    runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:7.0
+        env:
+          MONGO_INITDB_ROOT_USERNAME: crm_user
+          MONGO_INITDB_ROOT_PASSWORD: crm_secret
+          MONGO_INITDB_DATABASE: crm_db_test
+        ports: ["27017:27017"]
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ping:1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:8.0-alpine
+        ports: ["6379:6379"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: mongodb, redis
+          coverage: none
+
+      - name: Install Composer dependencies
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Copy .env
+        working-directory: backend
+        run: cp .env.example .env
+
+      - name: Set test env variables
+        working-directory: backend
+        run: |
+          sed -i 's/DB_DATABASE=crm_db/DB_DATABASE=crm_db_test/' .env
+          sed -i 's/DB_HOST=mongo/DB_HOST=127.0.0.1/' .env
+          sed -i 's/REDIS_HOST=redis/REDIS_HOST=127.0.0.1/' .env
+          sed -i 's/REDIS_PASSWORD=crm_redis_secret/REDIS_PASSWORD=/' .env
+
+      - name: Generate app key
+        working-directory: backend
+        run: php artisan key:generate
+
+      - name: Run Laravel tests
+        working-directory: backend
+        run: php artisan test --parallel
+
+  # ── Frontend Build ────────────────────────────────────────────────────────
+  frontend-build:
+    name: React Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: frontend/package.json
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm install
+
+      - name: Build
+        working-directory: frontend
+        run: npm run build
+
+  # ── Docker Build & Push ───────────────────────────────────────────────────
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: [backend-test, frontend-build]
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t saas-crm-app:latest ./docker/php
+
+      - name: Log success
+        run: echo "✅ Docker image built successfully"
