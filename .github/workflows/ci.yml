@@ -40,21 +40,40 @@ jobs:
           extensions: mongodb, redis
           coverage: none
 
+      - name: Create required directories
+        working-directory: backend
+        run: mkdir -p bootstrap/cache storage/framework/{sessions,views,cache} storage/logs
+
       - name: Install Composer dependencies
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Copy .env
-        working-directory: backend
-        run: cp .env.example .env
-
-      - name: Set test env variables
+      - name: Create .env for CI
         working-directory: backend
         run: |
-          sed -i 's/DB_DATABASE=crm_db/DB_DATABASE=crm_db_test/' .env
-          sed -i 's/DB_HOST=mongo/DB_HOST=127.0.0.1/' .env
-          sed -i 's/REDIS_HOST=redis/REDIS_HOST=127.0.0.1/' .env
-          sed -i 's/REDIS_PASSWORD=crm_redis_secret/REDIS_PASSWORD=/' .env
+          cat > .env << 'EOF'
+          APP_NAME=SaaS-CRM
+          APP_ENV=testing
+          APP_KEY=
+          APP_DEBUG=true
+          APP_URL=http://localhost
+
+          DB_CONNECTION=mongodb
+          DB_HOST=127.0.0.1
+          DB_PORT=27017
+          DB_DATABASE=crm_db_test
+          DB_USERNAME=crm_user
+          DB_PASSWORD=crm_secret
+          MONGODB_AUTH_SOURCE=admin
+
+          REDIS_HOST=127.0.0.1
+          REDIS_PORT=6379
+          REDIS_PASSWORD=null
+
+          QUEUE_CONNECTION=redis
+          CACHE_STORE=redis
+          SESSION_DRIVER=redis
+          EOF
 
       - name: Generate app key
         working-directory: backend
