@@ -38,7 +38,7 @@ class AuthController extends Controller
         $request->validate([
             'company_name' => 'required|string|min:2|max:100',
             'name' => 'required|string|min:2|max:100',
-            'email' => 'required|email|unique:mongodb.users,email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
