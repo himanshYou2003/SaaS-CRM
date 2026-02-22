@@ -39,8 +39,8 @@ class AuthService
                 'status' => 'trial',
                 'seats' => 5,
                 'price_per_month' => 0,
-                'started_at' => now(),
-                'expires_at' => now()->addDays(14),
+                'started_at' => \Illuminate\Support\Carbon::now(),
+                'expires_at' => \Illuminate\Support\Carbon::now()->addDays(14),
             ]);
 
             // 4. Create admin user
@@ -96,11 +96,15 @@ class AuthService
         $user = User::where('email', $email)->first();
 
         if (!$user || !Hash::check($password, $user->password)) {
-            return response()->json(['message' => 'Invalid credentials.'], 401)->throwResponse();
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(
+                response()->json(['message' => 'Invalid credentials.'], 401)
+            );
         }
 
         if (!$user->is_active) {
-            throw new \Exception('Your account has been deactivated.', 403);
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(
+                response()->json(['message' => 'Your account has been deactivated.'], 403)
+            );
         }
 
         // Revoke previous tokens to enforce single session (optional: remove for multi-device)

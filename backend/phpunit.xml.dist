@@ -19,12 +19,6 @@
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_STORE" value="array"/>
         <env name="DB_CONNECTION" value="mongodb"/>
-        <env name="DB_HOST" value="mongo"/>
-        <env name="DB_PORT" value="27017"/>
-        <env name="DB_DATABASE" value="crm_test"/>
-        <env name="DB_USERNAME" value="crm_user"/>
-        <env name="DB_PASSWORD" value="crm_secret"/>
-        <env name="MONGODB_AUTH_SOURCE" value="admin"/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="QUEUE_CONNECTION" value="sync"/>

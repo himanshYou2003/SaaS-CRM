@@ -27,7 +27,7 @@ jobs:
           --health-retries 5
 
       redis:
-        image: redis:8.0-alpine
+        image: redis:7.2-alpine
         ports: ["6379:6379"]
 
     steps:
@@ -81,7 +81,7 @@ jobs:
 
       - name: Run Laravel tests
         working-directory: backend
-        run: php artisan test --parallel
+        run: php artisan test
 
   # ── Frontend Build ────────────────────────────────────────────────────────
   frontend-build:
