@@ -1,7 +1,4 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+// This file is intentionally kept minimal.
+// All web traffic is handled by the API routes.
