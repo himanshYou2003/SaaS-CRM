@@ -49,7 +49,7 @@ frontend-install:
 
 ## Start frontend dev server
 frontend:
-	cd frontend && npm run dev
+	cd frontend && npm install && npm run dev
 
 ## Open Horizon dashboard
 horizon:
