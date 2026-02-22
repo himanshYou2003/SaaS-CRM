@@ -6,6 +6,7 @@ return [
     'connections' => [
         'mongodb' => [
             'driver' => 'mongodb',
+            'dsn' => env('MONGODB_URI'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', 27017),
             'database' => (function () {
@@ -17,6 +18,7 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'options' => [
                 'authSource' => env('MONGODB_AUTH_SOURCE', 'admin'),
+                'db' => env('DB_DATABASE', 'crm_db'), // Ensure default db is set for Atlas
             ],
         ],
     ],
