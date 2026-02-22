@@ -7,12 +7,15 @@ use App\Services\LeadService;
 use App\DTO\LeadDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 /**
  * @OA\Tag(name="Leads", description="Lead management")
  */
 class LeadController extends Controller
 {
+    use AuthorizesRequests;
+
     public function __construct(private readonly LeadService $service)
     {
     }

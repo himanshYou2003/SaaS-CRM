@@ -5,10 +5,9 @@ namespace App\Models;
 use Laravel\Sanctum\PersonalAccessToken as SanctumPersonalAccessToken;
 use MongoDB\Laravel\Eloquent\DocumentModel;
 
-class PersonalAccessToken extends SanctumPersonalAccessToken
+class MongoPersonalAccessToken extends SanctumPersonalAccessToken
 {
     use DocumentModel;
-
     protected $connection = 'mongodb';
     protected $collection = 'personal_access_tokens';
 
@@ -16,15 +15,21 @@ class PersonalAccessToken extends SanctumPersonalAccessToken
     protected $keyType = 'string';
     public $incrementing = false;
 
-    public function getKeyName()
-    {
-        return '_id';
-    }
-
     public function getKey()
     {
-        return (string) $this->getAttribute('_id');
+        $id = $this->attributes['_id'] ?? $this->attributes['id'] ?? null;
+
+        if ($id instanceof \MongoDB\BSON\ObjectId) {
+            return (string) $id;
+        }
+
+        if (is_array($id) && isset($id['$oid'])) {
+            return $id['$oid'];
+        }
+
+        return (string) ($id ?? $this->getAttribute('_id') ?? $this->getAttribute('id') ?? $this->_id ?? $this->id);
     }
+
 
     protected $fillable = [
         'name',
@@ -69,15 +74,12 @@ class PersonalAccessToken extends SanctumPersonalAccessToken
         }
 
         [$id, $token] = explode('|', $token, 2);
-        \Illuminate\Support\Facades\Log::debug("PersonalAccessToken::findToken splitting", ['id' => $id, 'token_hash' => hash('sha256', $token)]);
 
         // For MongoDB, we need to ensure the ID is handled correctly as a string or ObjectId
         if ($instance = static::find($id)) {
-            \Illuminate\Support\Facades\Log::debug("PersonalAccessToken::findToken instance found", ['instance_id' => $instance->_id]);
             return hash_equals($instance->token, hash('sha256', $token)) ? $instance : null;
         }
 
-        \Illuminate\Support\Facades\Log::debug("PersonalAccessToken::findToken instance NOT found", ['id' => $id]);
         return null;
     }
 }

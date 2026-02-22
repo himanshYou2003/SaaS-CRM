@@ -92,6 +92,9 @@ class AuthTest extends TestCase
             ->postJson('/api/v1/leads', ['title' => 'Secret Lead of A'])
             ->assertStatus(201);
 
+        // Ensure state is cleared before next request
+        $this->refreshApplication();
+
         // Company B should NOT see Company A's leads
         $leadsForB = $this->withToken($tokenB)
             ->getJson('/api/v1/leads')

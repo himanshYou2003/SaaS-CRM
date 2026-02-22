@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Use MongoDB-backed token model for Sanctum
         \Laravel\Sanctum\Sanctum::usePersonalAccessTokenModel(
-            \App\Models\PersonalAccessToken::class
+            \App\Models\MongoPersonalAccessToken::class
         );
 
         // Define the 'api' rate limiter (60 requests/min per user or IP)

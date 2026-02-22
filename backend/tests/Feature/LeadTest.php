@@ -64,8 +64,9 @@ class LeadTest extends TestCase
             ->postJson('/api/v1/leads', ['title' => 'Status Test'])
             ->json('data');
 
+        $leadId = $lead['id'] ?? $lead['_id'];
         $this->withToken($this->token)
-            ->postJson("/api/v1/leads/{$lead['_id']}/status", ['status' => 'qualified'])
+            ->postJson("/api/v1/leads/{$leadId}/status", ['status' => 'qualified'])
             ->assertStatus(200)
             ->assertJsonPath('data.status', 'qualified');
     }
@@ -76,8 +77,9 @@ class LeadTest extends TestCase
             ->postJson('/api/v1/leads', ['title' => 'To Delete'])
             ->json('data');
 
+        $leadId = $lead['id'] ?? $lead['_id'];
         $this->withToken($this->token)
-            ->deleteJson("/api/v1/leads/{$lead['_id']}")
+            ->deleteJson("/api/v1/leads/{$leadId}")
             ->assertStatus(204);
     }
 }

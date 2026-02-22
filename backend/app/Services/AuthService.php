@@ -57,12 +57,27 @@ class AuthService
             // 5. Issue token
             $token = $user->createToken('api-token');
 
+            // For MongoDB, ensure the ID is populated.
+            // Sanctum's createToken instance often lacks the ID immediately after save in this hybrid setup.
+            $tokenModel = $user->tokens()
+                ->where('token', $token->accessToken->token)
+                ->first() ?? $token->accessToken;
+
+            $rawToken = $token->plainTextToken;
+            $plainTextToken = str_contains($rawToken, '|') ? explode('|', $rawToken)[1] : $rawToken;
+
+            $token = new \Laravel\Sanctum\NewAccessToken($tokenModel, $tokenModel->getKey() . '|' . $plainTextToken);
+
             return [
                 'company' => $company,
                 'user' => $user->makeHidden(['password']),
                 'token' => $token->plainTextToken,
             ];
         } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error("AuthService::registerCompany failed", [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
             // Rollback: if company was created but user failed, delete the company and its roles
             if ($company) {
                 Role::where('company_id', $company->_id)->delete();
@@ -81,10 +96,7 @@ class AuthService
         $user = User::where('email', $email)->first();
 
         if (!$user || !Hash::check($password, $user->password)) {
-            throw new \Illuminate\Validation\ValidationException(
-                validator([], []),
-                response()->json(['message' => 'Invalid credentials.'], 401)
-            );
+            return response()->json(['message' => 'Invalid credentials.'], 401)->throwResponse();
         }
 
         if (!$user->is_active) {
@@ -95,6 +107,16 @@ class AuthService
         // $user->tokens()->delete();
 
         $token = $user->createToken('api-token');
+
+        // For MongoDB, ensure the ID is populated.
+        $tokenModel = $user->tokens()
+            ->where('token', $token->accessToken->token)
+            ->first() ?? $token->accessToken;
+
+        $rawToken = $token->plainTextToken;
+        $plainTextToken = str_contains($rawToken, '|') ? explode('|', $rawToken)[1] : $rawToken;
+
+        $token = new \Laravel\Sanctum\NewAccessToken($tokenModel, $tokenModel->getKey() . '|' . $plainTextToken);
 
         return [
             'user' => $user->load('role')->makeHidden(['password']),

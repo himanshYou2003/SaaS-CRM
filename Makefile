@@ -60,4 +60,4 @@ horizon-shell:
 	docker compose exec horizon php artisan horizon:status
 
 db-reset: ## Clear all MongoDB collections (for testing)
-	docker compose exec app php artisan tinker --execute="App\Models\User::truncate(); App\Models\Company::truncate(); App\Models\Role::truncate(); App\Models\Subscription::truncate(); App\Models\PersonalAccessToken::truncate(); echo 'Database cleared!';"
+	docker compose exec app php artisan tinker --execute="App\Models\User::truncate(); App\Models\Company::truncate(); App\Models\Role::truncate(); App\Models\Subscription::truncate(); App\Models\MongoPersonalAccessToken::truncate(); echo 'Database cleared!';"

@@ -42,6 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Override the tokens relationship to use MongoDB's morphMany.
+     */
+    public function tokens()
+    {
+        return $this->morphMany(\App\Models\MongoPersonalAccessToken::class, 'tokenable');
+    }
+
     // ── Relationships ─────────────────────────────────────────────────────────
 
     public function company()
@@ -61,8 +69,15 @@ class User extends Authenticatable
      */
     public function hasPermission(string $permission): bool
     {
+        $perms = $this->permissions ?? [];
+
+        // Wildcard support
+        if (in_array('*', $perms, true)) {
+            return true;
+        }
+
         // Direct user-level permissions
-        if (in_array($permission, $this->permissions ?? [], true)) {
+        if (in_array($permission, $perms, true)) {
             return true;
         }
 

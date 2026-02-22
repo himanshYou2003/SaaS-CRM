@@ -25,7 +25,7 @@ trait RefreshMongoDatabase
             'leads',
             'contacts',
             'deals',
-            // 'personal_access_tokens',
+            'personal_access_tokens',
         ];
 
         $db = DB::connection('mongodb')->getMongoDB();
