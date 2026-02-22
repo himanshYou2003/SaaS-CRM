@@ -18,48 +18,59 @@ class AuthService
      */
     public function registerCompany(RegisterDTO $dto): array
     {
-        // 1. Create the company
-        $company = Company::create([
-            'name' => $dto->companyName,
-            'slug' => Str::slug($dto->companyName) . '-' . Str::random(4),
-            'email' => $dto->email,
-            'plan' => 'starter',
-            'is_active' => true,
-        ]);
+        $company = null;
+        try {
+            // 1. Create the company
+            $company = Company::create([
+                'name' => $dto->companyName,
+                'slug' => Str::slug($dto->companyName) . '-' . Str::random(4),
+                'email' => $dto->email,
+                'plan' => 'starter',
+                'is_active' => true,
+            ]);
 
-        // 2. Create default roles for this tenant
-        $adminRole = $this->createDefaultRoles($company->_id);
+            // 2. Create default roles for this tenant
+            $adminRole = $this->createDefaultRoles($company->_id);
 
-        // 3. Create subscription (starter trial)
-        Subscription::create([
-            'company_id' => $company->_id,
-            'plan' => 'starter',
-            'status' => 'trial',
-            'seats' => 5,
-            'price_per_month' => 0,
-            'started_at' => now(),
-            'expires_at' => now()->addDays(14),
-        ]);
+            // 3. Create subscription (starter trial)
+            Subscription::create([
+                'company_id' => $company->_id,
+                'plan' => 'starter',
+                'status' => 'trial',
+                'seats' => 5,
+                'price_per_month' => 0,
+                'started_at' => now(),
+                'expires_at' => now()->addDays(14),
+            ]);
 
-        // 4. Create admin user
-        $user = User::create([
-            'company_id' => $company->_id,
-            'name' => $dto->name,
-            'email' => $dto->email,
-            'password' => Hash::make($dto->password),
-            'role_id' => $adminRole->_id,
-            'permissions' => ['*'],    // admin wildcard
-            'is_active' => true,
-        ]);
+            // 4. Create admin user
+            $user = User::create([
+                'company_id' => $company->_id,
+                'name' => $dto->name,
+                'email' => $dto->email,
+                'password' => Hash::make($dto->password),
+                'role_id' => $adminRole->_id,
+                'permissions' => ['*'],    // admin wildcard
+                'is_active' => true,
+            ]);
 
-        // 5. Issue token
-        $token = $user->createToken('api-token');
+            // 5. Issue token
+            $token = $user->createToken('api-token');
 
-        return [
-            'company' => $company,
-            'user' => $user->makeHidden(['password']),
-            'token' => $token->plainTextToken,
-        ];
+            return [
+                'company' => $company,
+                'user' => $user->makeHidden(['password']),
+                'token' => $token->plainTextToken,
+            ];
+        } catch (\Exception $e) {
+            // Rollback: if company was created but user failed, delete the company and its roles
+            if ($company) {
+                Role::where('company_id', $company->_id)->delete();
+                Subscription::where('company_id', $company->_id)->delete();
+                $company->delete();
+            }
+            throw $e;
+        }
     }
 
     /**

@@ -1,7 +1,7 @@
 # ── SaaS CRM Makefile ──────────────────────────────────────────────────────────
 # Convenience commands for common operations
 
-.PHONY: up down build shell artisan composer logs test frontend horizon
+.PHONY: up down build shell artisan composer logs test frontend horizon db-reset
 
 ## Start all Docker containers
 up:
@@ -58,3 +58,6 @@ horizon:
 ## Watch Horizon queue in terminal
 horizon-shell:
 	docker compose exec horizon php artisan horizon:status
+
+db-reset: ## Clear all MongoDB collections (for testing)
+	docker compose exec app php artisan tinker --execute="App\Models\User::truncate(); App\Models\Company::truncate(); App\Models\Role::truncate(); App\Models\Subscription::truncate(); App\Models\PersonalAccessToken::truncate(); echo 'Database cleared!';"

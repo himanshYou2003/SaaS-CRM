@@ -1,42 +1,36 @@
-[2026-02-22 17:44:08] local.ERROR: The /var/www/html/bootstrap/cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The /var/www/html/bootstrap/cache directory must be present and writable. at /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
-[stacktrace]
-#0 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate\\Foundation\\PackageManifest->write(Array)
-#1 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate\\Foundation\\PackageManifest->build()
-#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(91): Illuminate\\Foundation\\PackageManifest->getManifest()
-#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(80): Illuminate\\Foundation\\PackageManifest->config('aliases')
-#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate\\Foundation\\PackageManifest->aliases()
-#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterFacades->bootstrap(Object(Illuminate\\Foundation\\Application))
-#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(474): Illuminate\\Foundation\\Application->bootstrapWith(Array)
-#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
-#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
-#9 /var/www/html/artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
-#10 {main}
-"} 
-[2026-02-22 17:44:51] local.ERROR: The /var/www/html/bootstrap/cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The /var/www/html/bootstrap/cache directory must be present and writable. at /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
-[stacktrace]
-#0 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate\\Foundation\\PackageManifest->write(Array)
-#1 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate\\Foundation\\PackageManifest->build()
-#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(91): Illuminate\\Foundation\\PackageManifest->getManifest()
-#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(80): Illuminate\\Foundation\\PackageManifest->config('aliases')
-#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate\\Foundation\\PackageManifest->aliases()
-#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterFacades->bootstrap(Object(Illuminate\\Foundation\\Application))
-#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(474): Illuminate\\Foundation\\Application->bootstrapWith(Array)
-#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
-#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
-#9 /var/www/html/artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
-#10 {main}
-"} 
-[2026-02-22 17:45:08] local.ERROR: The /var/www/html/bootstrap/cache directory must be present and writable. {"exception":"[object] (Exception(code: 0): The /var/www/html/bootstrap/cache directory must be present and writable. at /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:179)
-[stacktrace]
-#0 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate\\Foundation\\PackageManifest->write(Array)
-#1 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate\\Foundation\\PackageManifest->build()
-#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(91): Illuminate\\Foundation\\PackageManifest->getManifest()
-#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(80): Illuminate\\Foundation\\PackageManifest->config('aliases')
-#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate\\Foundation\\PackageManifest->aliases()
-#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterFacades->bootstrap(Object(Illuminate\\Foundation\\Application))
-#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(474): Illuminate\\Foundation\\Application->bootstrapWith(Array)
-#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
-#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
-#9 /var/www/html/artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
-#10 {main}
-"} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"b432102632f5e80a0e0a8006fa713e74d310ed7cd5a3670ad982b9464a24a239"} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"fe322979114829e3c81857bf7c97e5dc2f28588a2f9a7c8bd561bafa6c09a95e"} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"fe322979114829e3c81857bf7c97e5dc2f28588a2f9a7c8bd561bafa6c09a95e"} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"fe322979114829e3c81857bf7c97e5dc2f28588a2f9a7c8bd561bafa6c09a95e"} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"4765e59ae1e6fce79f877130544320efb9b834a1216e62e2289e774e6e8d4fb2"} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"85acffd74faa03d8f9b00a46b3f744bec3ff0e005c6d5976a66b49b78c237adb"} 
+[2026-02-22 18:17:24] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:05] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"3e4e3ccb1c6ac456aead25a139406470a7f457a94605d4671777de42df608312"} 
+[2026-02-22 18:18:05] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:05] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"2833f13c097e4cfc56bb731f7b2cee961d695b39f9dae04157c8b6357ed1f6e6"} 
+[2026-02-22 18:18:05] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:05] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"2833f13c097e4cfc56bb731f7b2cee961d695b39f9dae04157c8b6357ed1f6e6"} 
+[2026-02-22 18:18:05] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:05] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"2833f13c097e4cfc56bb731f7b2cee961d695b39f9dae04157c8b6357ed1f6e6"} 
+[2026-02-22 18:18:05] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:05] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"e66a1e8fe14ead007802d82ce38052eb42de7b828b2aa9f609121a01d706fcb8"} 
+[2026-02-22 18:18:05] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:06] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"8af397fffa8fd23feb71b08d0d5d77882fdc175236d43f6200897cf51c9b827f"} 
+[2026-02-22 18:18:06] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"3336c9259098371d878df04bcfe7fde76c1c08e03172776e91659ab3e6f0901a"} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"197ddcf07e6f075b7dc7c3b2a6793c52c1a61323a6791f6648fd7817a193a7a1"} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"197ddcf07e6f075b7dc7c3b2a6793c52c1a61323a6791f6648fd7817a193a7a1"} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"197ddcf07e6f075b7dc7c3b2a6793c52c1a61323a6791f6648fd7817a193a7a1"} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"db27c281aa46b2c5f8f9057504c408eb8b3817d2746eecfab7efceea4005b741"} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken splitting {"id":"","token_hash":"b08c331e38a0ddb3539777ae08bea9888f8b09f9cbd36879f97e624023d10571"} 
+[2026-02-22 18:18:35] local.DEBUG: PersonalAccessToken::findToken instance NOT found {"id":""} 

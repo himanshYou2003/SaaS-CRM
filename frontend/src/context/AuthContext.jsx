@@ -19,8 +19,11 @@ export function AuthProvider({ children }) {
       setUser(data.data.user)
       return data.data
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed')
-      throw err
+      const msg = err.response?.data?.message || err.response?.data?.errors 
+        ? Object.values(err.response.data.errors)[0][0] 
+        : 'Login failed'
+      setError(msg)
+      throw err;
     } finally {
       setLoading(false)
     }
@@ -35,8 +38,11 @@ export function AuthProvider({ children }) {
       setUser(data.data.user)
       return data.data
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed')
-      throw err
+      const msg = err.response?.data?.message || (err.response?.data?.errors 
+        ? Object.values(err.response.data.errors)[0][0] 
+        : 'Registration failed')
+      setError(msg)
+      throw err;
     } finally {
       setLoading(false)
     }

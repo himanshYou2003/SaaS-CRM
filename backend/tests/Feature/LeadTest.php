@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\RefreshMongoDatabase;
 
 class LeadTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshMongoDatabase;
 
-    private string $token;
-    private array $company;
+    private ?string $token = null;
+    private ?array $company = null;
 
     protected function setUp(): void
     {
@@ -23,6 +23,8 @@ class LeadTest extends TestCase
             'password' => 'secret123!',
             'password_confirmation' => 'secret123!',
         ]);
+
+        $response->assertStatus(201);
 
         $this->token = $response->json('data.token');
         $this->company = $response->json('data.company');

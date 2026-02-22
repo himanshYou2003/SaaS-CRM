@@ -2,12 +2,14 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Company;
+use App\Models\User;
+use Tests\RefreshMongoDatabase;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshMongoDatabase;
 
     public function test_register_company_creates_admin_user_and_default_roles(): void
     {
@@ -29,8 +31,8 @@ class AuthTest extends TestCase
                 ],
             ]);
 
-        $this->assertDatabaseHas('users', ['email' => 'admin@acme.com']);
-        $this->assertDatabaseHas('companies', ['name' => 'Acme Corp']);
+        $this->assertNotNull(User::where('email', 'admin@acme.com')->first());
+        $this->assertNotNull(Company::where('name', 'Acme Corp')->first());
     }
 
     public function test_login_returns_token(): void
@@ -42,7 +44,7 @@ class AuthTest extends TestCase
             'email' => 'jane@beta.com',
             'password' => 'secret123!',
             'password_confirmation' => 'secret123!',
-        ]);
+        ])->assertStatus(201);
 
         $response = $this->postJson('/api/v1/auth/login', [
             'email' => 'jane@beta.com',
@@ -72,7 +74,7 @@ class AuthTest extends TestCase
             'email' => 'admin@companya.com',
             'password' => 'secret123!',
             'password_confirmation' => 'secret123!',
-        ]);
+        ])->assertStatus(201);
         $tokenA = $responseA->json('data.token');
 
         // Register company B
@@ -82,7 +84,7 @@ class AuthTest extends TestCase
             'email' => 'admin@companyb.com',
             'password' => 'secret123!',
             'password_confirmation' => 'secret123!',
-        ]);
+        ])->assertStatus(201);
         $tokenB = $responseB->json('data.token');
 
         // Company A creates a lead

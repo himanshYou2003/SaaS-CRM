@@ -5,6 +5,9 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
+    ->withProviders([
+        \App\Providers\AppServiceProvider::class,
+    ])
     ->withRouting(
         web: __DIR__ . '/../routes/web.php',
         api: __DIR__ . '/../routes/api.php',
@@ -21,8 +24,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \App\Http\Middleware\CheckPermission::class,
             'api.version' => \App\Http\Middleware\ApiVersion::class,
         ]);
-
-        $middleware->throttleApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->renderable(function (\Illuminate\Auth\AuthenticationException $e) {
@@ -32,7 +33,10 @@ return Application::configure(basePath: dirname(__DIR__))
             return response()->json(['message' => 'Forbidden.'], 403);
         });
         $exceptions->renderable(function (\Illuminate\Validation\ValidationException $e) {
-            return response()->json(['message' => 'Validation failed.', 'errors' => $e->errors()], 422);
+            return response()->json([
+                'message' => $e->validator->errors()->first(),
+                'errors' => $e->validator->errors()
+            ], 422);
         });
         $exceptions->renderable(function (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json(['message' => 'Resource not found.'], 404);

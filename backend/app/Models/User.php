@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use MongoDB\Laravel\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 
@@ -19,9 +17,9 @@ use Illuminate\Notifications\Notifiable;
  *   @OA\Property(property="permissions", type="array", @OA\Items(type="string")),
  * )
  */
-class User extends Model implements AuthenticatableContract
+class User extends Authenticatable
 {
-    use Authenticatable, HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable;
 
     protected $connection = 'mongodb';
     protected $collection = 'users';
