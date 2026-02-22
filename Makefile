@@ -38,7 +38,8 @@ test:
 ## Install backend deps and set up Laravel (first time)
 setup:
 	docker compose up -d
-	docker compose exec app composer install
+	docker compose exec app bash -c "mkdir -p bootstrap/cache storage/framework/{sessions,views,cache} storage/logs && chmod -R 775 bootstrap/cache storage"
+	docker compose exec app composer install --no-interaction
 	docker compose exec app php artisan key:generate
 	@echo "✅ Backend ready at http://localhost:8080"
 
