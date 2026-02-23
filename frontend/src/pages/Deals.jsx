@@ -165,9 +165,9 @@ export default function Deals() {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold text-brand-dark flex items-center gap-3">
-            <Briefcase className="text-brand-green" size={28} /> Deals Pipeline
+            <Briefcase className="text-brand-green" size={28} /> Pipeline
           </h1>
-          <p className="text-brand-slate font-medium mt-1">Viusalize your sales flow and revenue projections.</p>
+          <p className="text-brand-slate font-medium mt-1">Visualize your sales flow and revenue projections.</p>
         </div>
         <button className="btn-brand shadow-lg shadow-brand-green/20 py-2.5 px-6" onClick={() => setModal('new')}>
           <Plus size={18} /> New Deal

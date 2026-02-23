@@ -45,7 +45,7 @@ export default function Sidebar({ isOpen, onClose }) {
           </div>
           <span className="text-xl font-bold tracking-tight text-brand-dark">DocMonitoring</span>
         </div>
-        {/* Close button for mobile */}
+        
         <button className="lg:hidden p-2 text-brand-slate hover:text-brand-green" onClick={onClose}>
           <X size={20} />
         </button>
@@ -96,7 +96,7 @@ export default function Sidebar({ isOpen, onClose }) {
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-bold text-brand-dark truncate leading-tight">{user?.name}</div>
-              <div className="text-[10px] font-bold text-brand-slate truncate uppercase tracking-tight">{user?.email}</div>
+              <div className="text-[10px] font-bold text-brand-slate truncate uppercase tracking-tight">Enterprise • himanshu</div>
             </div>
           </div>
           <button 

@@ -62,14 +62,12 @@ export default function Dashboard() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       <header>
-        <h1 className="text-3xl font-bold text-brand-dark">Overview</h1>
-        <p className="text-brand-slate font-medium mt-1">Welcome back. Here's what's happening today.</p>
+        <h1 className="text-3xl font-bold text-brand-dark">Dashboard</h1>
+        <p className="text-brand-slate font-medium mt-1">Hey himanshu, here's the pulse of your CRM today.</p>
       </header>
 
-      {/* Bento Grid */}
       <div className="grid grid-cols-12 gap-4 lg:gap-6">
         
-        {/* KPI: Revenue */}
         <div className="col-span-6 md:col-span-6 lg:col-span-3 bento-card flex flex-col justify-between min-h-[140px] lg:min-h-[160px] !p-4 lg:!p-6">
           <div className="flex justify-between items-start">
             <div className="bg-brand-green/10 p-1.5 lg:p-2 rounded-lg text-brand-green">
@@ -83,7 +81,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* KPI: Conversion */}
         <div className="col-span-6 lg:col-span-3 bento-card flex flex-col justify-between min-h-[140px] lg:min-h-[160px] !p-4 lg:!p-6">
           <div className="flex justify-between items-start">
             <div className="bg-brand-lime/20 p-1.5 lg:p-2 rounded-lg text-brand-green">
@@ -97,7 +94,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* KPI: Leads */}
         <div className="col-span-6 lg:col-span-3 bento-card flex flex-col justify-between min-h-[140px] lg:min-h-[160px] !p-4 lg:!p-6">
           <div className="flex justify-between items-start">
             <div className="bg-blue-50 p-1.5 lg:p-2 rounded-lg text-blue-600">
@@ -110,7 +106,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* KPI: Deals */}
         <div className="col-span-6 lg:col-span-3 bento-card flex flex-col justify-between min-h-[140px] lg:min-h-[160px] !p-4 lg:!p-6">
           <div className="flex justify-between items-start">
             <div className="bg-amber-50 p-1.5 lg:p-2 rounded-lg text-amber-600">
@@ -123,7 +118,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Revenue Trend Chart & Growth Hub */}
         <div className="col-span-12 lg:col-span-8 bento-card !p-0 overflow-hidden flex flex-col">
           <div className="p-6 lg:p-8 border-b border-gray-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
@@ -233,7 +227,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Lead Status (Donut) */}
         <div className="col-span-12 md:col-span-12 lg:col-span-4 bento-card h-[400px] flex flex-col">
           <h3 className="text-lg font-bold mb-6 text-center">Lead Status</h3>
           <div className="flex-1">
@@ -263,7 +256,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Sales Performers Table */}
         <div className="col-span-12 bento-card overflow-hidden">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-lg font-bold">Top Sales Performers</h3>

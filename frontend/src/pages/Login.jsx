@@ -25,7 +25,6 @@ export default function Login() {
     <div className="min-h-screen bg-brand-surface flex items-center justify-center p-6 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-green/5 via-transparent to-transparent font-sans">
       <div className="w-full max-w-[440px] animate-in fade-in slide-in-from-bottom-8 duration-700">
         <div className="bg-white rounded-[24px] shadow-2xl shadow-brand-green/5 p-10 relative overflow-hidden">
-          {/* Brand Logo */}
           <div className="flex flex-col items-center mb-10">
             <div className="bg-brand-green/10 p-3 rounded-2xl mb-4">
               <Zap size={32} className="text-brand-green fill-current" />
@@ -99,7 +98,7 @@ export default function Login() {
         </div>
 
         <div className="mt-8 text-center text-[10px] font-bold text-brand-slate uppercase tracking-[4px] opacity-40">
-          Powered by SaaS CRM Global
+          Crafted by himanshu
         </div>
       </div>
     </div>

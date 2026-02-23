@@ -167,7 +167,7 @@ export default function Leads() {
                     <td className="px-8 py-5 text-center"><LeadBadge status={l.status} /></td>
                     <td className="px-8 py-5">
                       <div className="font-bold text-brand-green">${(l.value ?? 0).toLocaleString()}</div>
-                      <div className="text-[10px] text-brand-slate font-bold uppercase tracking-tight">Projected Revenue</div>
+                      <div className="text-[10px] text-brand-slate font-bold uppercase tracking-tight">Projected</div>
                     </td>
                     <td className="px-8 py-5 font-medium text-brand-slate text-sm">
                       {new Date(l.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
