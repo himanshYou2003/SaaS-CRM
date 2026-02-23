@@ -34,6 +34,10 @@ git clone <repo-url> && cd multi
 make build   # Build Docker images
 make up      # Run services
 make setup   # Initialize application
+
+# Frontend setup
+cd frontend
+npm install
 ```
 
 ### 📍 Local Services
