@@ -1,4 +1,4 @@
-# DocMonitoring CRM by himanshu
+# DocMonitoring CRM
 
 A high-performance, multi-tenant CRM built for the modern enterprise. This project is a proprietary implementation focusing on scalability, security, and a premium user experience.
 
