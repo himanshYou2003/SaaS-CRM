@@ -15,10 +15,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->api(prepend: [
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-        ]);
-
         $middleware->alias([
             'tenant' => \App\Http\Middleware\TenantMiddleware::class,
             'permission' => \App\Http\Middleware\CheckPermission::class,
