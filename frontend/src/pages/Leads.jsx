@@ -154,13 +154,13 @@ export default function Leads() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {leads.length > 0 ? leads.map(l => (
-                  <tr key={l._id} className="group hover:bg-gray-50/30 transition-colors">
+                {leads.length > 0 ? leads.map((l, i) => (
+                  <tr key={l._id || l.id || i} className="group hover:bg-gray-50/30 transition-colors">
                     <td className="px-8 py-5">
                       <div className="font-bold text-brand-dark group-hover:text-brand-green transition-colors">{l.title}</div>
                       <div className="flex gap-1.5 mt-1.5">
-                        {l.tags?.map(t => (
-                          <span key={t} className="text-[10px] font-bold text-brand-slate bg-gray-100 px-2 py-0.5 rounded uppercase tracking-tighter">{t}</span>
+                        {l.tags?.map((t, i) => (
+                          <span key={`${t}-${i}`} className="text-[10px] font-bold text-brand-slate bg-gray-100 px-2 py-0.5 rounded uppercase tracking-tighter">{t}</span>
                         ))}
                       </div>
                     </td>
@@ -172,12 +172,12 @@ export default function Leads() {
                     <td className="px-8 py-5 font-medium text-brand-slate text-sm">
                       {new Date(l.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </td>
-                    <td className="px-8 py-5 text-right">
-                      <div className="flex gap-2 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button className="p-2 hover:bg-brand-green/10 text-brand-slate hover:text-brand-green rounded-lg transition-colors" onClick={() => setModal(l)}>
+                    <td className="px-4 lg:px-8 py-5 text-right">
+                      <div className="flex gap-2 justify-end lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                        <button className="p-2 bg-gray-50 lg:bg-transparent hover:bg-brand-green/10 text-brand-slate hover:text-brand-green rounded-lg transition-colors" onClick={() => setModal(l)}>
                           <CheckCircle size={18} />
                         </button>
-                        <button className="p-2 hover:bg-red-50 text-brand-slate hover:text-red-500 rounded-lg transition-colors" onClick={() => del(l._id)}>
+                        <button className="p-2 bg-gray-50 lg:bg-transparent hover:bg-red-50 text-brand-slate hover:text-red-500 rounded-lg transition-colors" onClick={() => del(l._id)}>
                           <X size={18} />
                         </button>
                       </div>

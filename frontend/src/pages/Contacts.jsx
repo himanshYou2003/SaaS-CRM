@@ -142,8 +142,8 @@ export default function Contacts() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {contacts.length > 0 ? contacts.map(c => (
-                  <tr key={c._id} className="group hover:bg-gray-50/30 transition-colors">
+                {contacts.length > 0 ? contacts.map((c, i) => (
+                  <tr key={c._id || c.id || i} className="group hover:bg-gray-50/30 transition-colors">
                     <td className="px-8 py-5">
                       <div className="flex items-center gap-4">
                         <div className="w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center font-bold text-sm shadow-sm">
@@ -164,12 +164,12 @@ export default function Contacts() {
                         {c.company || 'Personal'}
                       </span>
                     </td>
-                    <td className="px-8 py-5 text-right">
-                      <div className="flex gap-2 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button className="p-2 hover:bg-brand-green/10 text-brand-slate hover:text-brand-green rounded-lg transition-colors" onClick={() => setModal(c)}>
+                    <td className="px-4 lg:px-8 py-5 text-right">
+                      <div className="flex gap-2 justify-end lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                        <button className="p-2 bg-gray-50 lg:bg-transparent hover:bg-brand-green/10 text-brand-slate hover:text-brand-green rounded-lg transition-colors" onClick={() => setModal(c)}>
                           <CheckCircle size={18} />
                         </button>
-                        <button className="p-2 hover:bg-red-50 text-brand-slate hover:text-red-500 rounded-lg transition-colors" onClick={() => del(c._id)}>
+                        <button className="p-2 bg-gray-50 lg:bg-transparent hover:bg-red-50 text-brand-slate hover:text-red-500 rounded-lg transition-colors" onClick={() => del(c._id)}>
                           <X size={18} />
                         </button>
                       </div>

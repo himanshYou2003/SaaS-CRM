@@ -179,7 +179,7 @@ export default function Deals() {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-green"></div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6 gap-6 pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-6 pb-8">
           {STAGES.map(stage => (
             <div key={stage} className="flex flex-col gap-4 min-w-0">
               <div className="flex items-center justify-between px-2">
@@ -195,9 +195,9 @@ export default function Deals() {
               </div>
               
               <div className="bg-gray-50/50 rounded-2xl p-3 min-h-[400px] border border-gray-100/50 flex flex-col gap-3 transition-colors hover:bg-gray-100/30">
-                {(board[stage] ?? []).map(deal => (
+                {(board[stage] ?? []).map((deal, i) => (
                   <KanbanCard 
-                    key={deal._id} deal={deal}
+                    key={deal._id || deal.id || i} deal={deal}
                     onEdit={setModal}
                     onStageChange={stageChange} 
                   />

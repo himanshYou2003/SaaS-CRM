@@ -67,65 +67,65 @@ export default function Dashboard() {
       </header>
 
       {/* Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <div className="grid grid-cols-12 gap-4 lg:gap-6">
         
         {/* KPI: Revenue */}
-        <div className="md:col-span-3 bento-card flex flex-col justify-between">
+        <div className="col-span-6 md:col-span-6 lg:col-span-3 bento-card flex flex-col justify-between min-h-[140px] lg:min-h-[160px] !p-4 lg:!p-6">
           <div className="flex justify-between items-start">
-            <div className="bg-brand-green/10 p-2 rounded-lg text-brand-green">
-              <TrendingUp size={20} />
+            <div className="bg-brand-green/10 p-1.5 lg:p-2 rounded-lg text-brand-green">
+              <TrendingUp size={18} className="lg:w-5 lg:h-5" />
             </div>
-            <span className="text-xs font-bold text-brand-green bg-brand-green/10 px-2 py-1 rounded">+{latestMoM}%</span>
+            <span className="text-[10px] lg:text-xs font-bold text-brand-green bg-brand-green/10 px-2 py-0.5 lg:py-1 rounded">+{latestMoM}%</span>
           </div>
           <div className="mt-4">
-            <div className="text-3xl font-bold tracking-tight">${totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-            <div className="text-sm font-medium text-brand-slate mt-1">Total Revenue (YTD)</div>
+            <div className="text-xl lg:text-3xl font-bold tracking-tight">${totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</div>
+            <div className="text-[10px] lg:text-sm font-medium text-brand-slate mt-1">Total Revenue (YTD)</div>
           </div>
         </div>
 
         {/* KPI: Conversion */}
-        <div className="md:col-span-3 bento-card flex flex-col justify-between">
+        <div className="col-span-6 lg:col-span-3 bento-card flex flex-col justify-between min-h-[140px] lg:min-h-[160px] !p-4 lg:!p-6">
           <div className="flex justify-between items-start">
-            <div className="bg-brand-lime/20 p-2 rounded-lg text-brand-green">
-              <Target size={20} />
+            <div className="bg-brand-lime/20 p-1.5 lg:p-2 rounded-lg text-brand-green">
+              <Target size={18} className="lg:w-5 lg:h-5" />
             </div>
-            <span className="text-xs font-bold text-brand-green bg-brand-green/10 px-2 py-1 rounded">Target</span>
+            <span className="text-[10px] lg:text-xs font-bold text-brand-green bg-brand-green/10 px-2 py-0.5 lg:py-1 rounded text-center">Target</span>
           </div>
           <div className="mt-4">
-            <div className="text-3xl font-bold tracking-tight">{conversion?.conversion_rate ?? 0}%</div>
-            <div className="text-sm font-medium text-brand-slate mt-1">Conversion Rate</div>
+            <div className="text-xl lg:text-3xl font-bold tracking-tight">{conversion?.conversion_rate ?? 0}%</div>
+            <div className="text-[10px] lg:text-sm font-medium text-brand-slate mt-1">Conversion Rate</div>
           </div>
         </div>
 
         {/* KPI: Leads */}
-        <div className="md:col-span-3 bento-card flex flex-col justify-between">
+        <div className="col-span-6 lg:col-span-3 bento-card flex flex-col justify-between min-h-[140px] lg:min-h-[160px] !p-4 lg:!p-6">
           <div className="flex justify-between items-start">
-            <div className="bg-blue-50 p-2 rounded-lg text-blue-600">
-              <Users size={20} />
+            <div className="bg-blue-50 p-1.5 lg:p-2 rounded-lg text-blue-600">
+              <Users size={18} className="lg:w-5 lg:h-5" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-3xl font-bold tracking-tight">{conversion?.total ?? 0}</div>
-            <div className="text-sm font-medium text-brand-slate mt-1">Total Leads</div>
+            <div className="text-xl lg:text-3xl font-bold tracking-tight">{conversion?.total ?? 0}</div>
+            <div className="text-[10px] lg:text-sm font-medium text-brand-slate mt-1">Total Leads</div>
           </div>
         </div>
 
         {/* KPI: Deals */}
-        <div className="md:col-span-3 bento-card flex flex-col justify-between">
+        <div className="col-span-6 lg:col-span-3 bento-card flex flex-col justify-between min-h-[140px] lg:min-h-[160px] !p-4 lg:!p-6">
           <div className="flex justify-between items-start">
-            <div className="bg-amber-50 p-2 rounded-lg text-amber-600">
-              <Briefcase size={20} />
+            <div className="bg-amber-50 p-1.5 lg:p-2 rounded-lg text-amber-600">
+              <Briefcase size={18} className="lg:w-5 lg:h-5" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-3xl font-bold tracking-tight">{conversion?.won ?? 0}</div>
-            <div className="text-sm font-medium text-brand-slate mt-1">Deals Won</div>
+            <div className="text-xl lg:text-3xl font-bold tracking-tight">{conversion?.won ?? 0}</div>
+            <div className="text-[10px] lg:text-sm font-medium text-brand-slate mt-1">Deals Won</div>
           </div>
         </div>
 
         {/* Revenue Trend Chart & Growth Hub */}
-        <div className="md:col-span-8 bento-card !p-0 overflow-hidden flex flex-col">
-          <div className="p-8 border-b border-gray-50 flex justify-between items-center">
+        <div className="col-span-12 lg:col-span-8 bento-card !p-0 overflow-hidden flex flex-col">
+          <div className="p-6 lg:p-8 border-b border-gray-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
               <h3 className="text-lg font-bold text-brand-dark">Revenue Dynamics</h3>
               <p className="text-sm font-medium text-brand-slate">Performance metrics and projections</p>
@@ -135,14 +135,14 @@ export default function Dashboard() {
                 <div className="w-2 h-2 rounded-full bg-brand-green" /> Actual
               </div>
               <div className="px-3 py-1.5 bg-gray-50 rounded-lg text-[10px] font-bold text-brand-slate uppercase tracking-wider flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-brand-slate" opacity="0.3" /> Trend
+                <div className="w-2 h-2 rounded-full bg-brand-slate opacity-30" /> Trend
               </div>
             </div>
           </div>
           
-          <div className="flex-1 grid grid-cols-12">
+          <div className="flex-1 grid grid-cols-1 lg:grid-cols-12">
             {/* Chart Area */}
-            <div className="col-span-8 p-6 h-[320px]">
+            <div className="lg:col-span-8 p-6 h-[300px] lg:h-[320px]">
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={processedData}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F1F5F9" />
@@ -234,7 +234,7 @@ export default function Dashboard() {
         </div>
 
         {/* Lead Status (Donut) */}
-        <div className="md:col-span-4 bento-card h-[400px] flex flex-col">
+        <div className="col-span-12 md:col-span-12 lg:col-span-4 bento-card h-[400px] flex flex-col">
           <h3 className="text-lg font-bold mb-6 text-center">Lead Status</h3>
           <div className="flex-1">
             <ResponsiveContainer width="100%" height="100%">
@@ -264,7 +264,7 @@ export default function Dashboard() {
         </div>
 
         {/* Sales Performers Table */}
-        <div className="md:col-span-12 bento-card overflow-hidden">
+        <div className="col-span-12 bento-card overflow-hidden">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-lg font-bold">Top Sales Performers</h3>
           </div>
