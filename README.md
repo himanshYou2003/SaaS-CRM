@@ -3,7 +3,7 @@
 I built a production-ready multi-tenant SaaS CRM using Laravel and MongoDB, implemented tenant isolation, role-based dynamic permissions, aggregation-based analytics engine, Redis-backed caching, event-driven architecture, and versioned public APIs.
 
 ---
-![CRM](./public/CRM.png)
+![CRM](./frontend/public/CRM.png)
 ## 🛠 Core Stack
 
 - **Backend**: Laravel 11 (PHP 8.4)
