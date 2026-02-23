@@ -35,34 +35,57 @@ function RoleModal({ role, onClose, onSaved }) {
   }
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" style={{ maxWidth: 600 }} onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
-          <span className="modal-title">{editing ? 'Edit Role' : 'New Role'}</span>
-          <button className="btn btn-ghost btn-sm" onClick={onClose}><X size={16} /></button>
+    <div className="fixed inset-0 bg-brand-dark/40 backdrop-blur-sm flex items-center justify-center z-[1000] p-4 animate-in fade-in duration-200" onClick={onClose}>
+      <div className="bg-white rounded-bento shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in-95 duration-300" onClick={e => e.stopPropagation()}>
+        <div className="px-8 py-6 border-b border-gray-100 flex justify-between items-center">
+          <h2 className="text-xl font-bold text-brand-dark">{editing ? 'Edit Role' : 'New Role'}</h2>
+          <button className="text-brand-slate hover:text-brand-dark transition-colors" onClick={onClose}><X size={20} /></button>
         </div>
-        {err && <div className="error-msg mb-4">{err}</div>}
-        <form onSubmit={save}>
-          <div className="form-group"><label>Role Name*</label>
-            <input value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} required /></div>
-          <div className="form-group"><label>Description</label>
-            <input value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} /></div>
-          <div className="form-group">
-            <label>Permissions</label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 8 }}>
+        
+        <form onSubmit={save} className="p-8 space-y-6">
+          {err && <div className="p-3 bg-red-50 text-red-600 rounded-lg text-sm font-medium border border-red-100">{err}</div>}
+          
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-brand-slate uppercase tracking-wider">Role Name</label>
+              <input 
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green outline-none transition-all placeholder:text-gray-400"
+                value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} required placeholder="e.g. Sales Manager" 
+              />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-brand-slate uppercase tracking-wider">Description</label>
+              <input 
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green outline-none transition-all placeholder:text-gray-400"
+                value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} placeholder="Briefly describe responsibility" 
+              />
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <label className="text-xs font-bold text-brand-slate uppercase tracking-wider">Permissions Matrix</label>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
               {ALL_PERMISSIONS.map(p => (
-                <label key={p} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer',
-                  color: 'var(--text)', fontSize: '0.85rem', fontWeight: 400 }}>
-                  <input type="checkbox" checked={form.permissions.includes(p)} onChange={() => togglePerm(p)}
-                    style={{ width: 'auto', accentColor: 'var(--accent)' }} />
-                  {p}
+                <label key={p} className="flex items-center gap-2 group cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    className="w-4 h-4 rounded border-gray-300 text-brand-green focus:ring-brand-green/20 transition-all cursor-pointer"
+                    checked={form.permissions.includes(p)} 
+                    onChange={() => togglePerm(p)}
+                  />
+                  <span className="text-xs font-medium text-brand-slate group-hover:text-brand-dark transition-colors truncate">
+                    {p.replace('_', ' ')}
+                  </span>
                 </label>
               ))}
             </div>
           </div>
-          <div className="flex-gap" style={{ justifyContent: 'flex-end', marginTop: 12 }}>
-            <button type="button" className="btn btn-ghost" onClick={onClose}>Cancel</button>
-            <button type="submit" className="btn btn-primary"><CheckCircle size={15} /> Save</button>
+
+          <div className="pt-4 flex gap-3 justify-end">
+            <button type="button" className="btn-ghost" onClick={onClose}>Cancel</button>
+            <button type="submit" className="btn-brand shadow-lg shadow-brand-green/20">
+              <CheckCircle size={18} /> {editing ? 'Update Role' : 'Create Role'}
+            </button>
           </div>
         </form>
       </div>
@@ -90,40 +113,76 @@ export default function Roles() {
   }
 
   return (
-    <>
-      <div className="page-header">
-        <h1 className="page-title"><ShieldCheck size={22} style={{ marginRight: 8, verticalAlign: 'middle' }} />Roles & Permissions</h1>
-        <button className="btn btn-primary" onClick={() => setModal('new')}><Plus size={16} /> New Role</button>
+    <div className="animate-in fade-in duration-500">
+      <div className="flex justify-between items-center mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-brand-dark flex items-center gap-3">
+            <ShieldCheck className="text-brand-green" size={28} /> Roles & Permissions
+          </h1>
+          <p className="text-brand-slate font-medium mt-1">Control access levels and system capabilities.</p>
+        </div>
+        <button className="btn-brand shadow-lg shadow-brand-green/20 py-2.5 px-6" onClick={() => setModal('new')}>
+          <Plus size={18} /> New Role
+        </button>
       </div>
 
-      {loading ? <div className="loading-page"><span className="spinner" /></div> : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16 }}>
+      {loading ? (
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-green"></div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {roles.map(role => (
-            <div key={role._id} className="card">
-              <div className="flex-between mb-4">
-                <span style={{ fontWeight: 700, fontSize: '1rem' }}>{role.name}</span>
+            <div key={role._id} className="bento-card flex flex-col group">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-lg font-bold text-brand-dark group-hover:text-brand-green transition-colors">{role.name}</h3>
+                  <p className="text-sm text-brand-slate font-medium mt-1 leading-relaxed">{role.description || 'No description provided.'}</p>
+                </div>
                 {role.name !== 'admin' && (
-                  <div className="flex-gap">
-                    <button className="btn btn-ghost btn-sm" onClick={() => setModal(role)}>Edit</button>
-                    <button className="btn btn-danger btn-sm" onClick={() => del(role._id, role.name)}>Del</button>
+                  <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button className="p-2 hover:bg-brand-green/10 text-brand-slate hover:text-brand-green rounded-lg transition-colors" onClick={() => setModal(role)}>
+                      <CheckCircle size={16} />
+                    </button>
+                    <button className="p-2 hover:bg-red-50 text-brand-slate hover:text-red-500 rounded-lg transition-colors" onClick={() => del(role._id, role.name)}>
+                      <X size={16} />
+                    </button>
                   </div>
                 )}
               </div>
-              <p className="text-muted" style={{ fontSize: '0.85rem', marginBottom: 12 }}>{role.description}</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                {(role.permissions ?? []).map(p => (
-                  <span key={p} className="badge" style={{ background: 'var(--surface-2)', color: 'var(--text-muted)', fontSize: '0.7rem' }}>{p}</span>
-                ))}
-                {role.permissions?.includes('*') && (
-                  <span className="badge badge-won">ALL PERMISSIONS</span>
-                )}
+
+              <div className="mt-auto pt-4 border-t border-gray-50">
+                <div className="flex flex-wrap gap-2">
+                  {role.permissions?.includes('*') ? (
+                    <span className="px-2.5 py-1 bg-brand-green bg-opacity-10 text-brand-green text-[10px] font-bold rounded-full uppercase tracking-wider">
+                      Master Administrator
+                    </span>
+                  ) : (
+                    (role.permissions ?? []).slice(0, 6).map(p => (
+                      <span key={p} className="px-2 py-0.5 bg-gray-100 text-brand-slate text-[9px] font-bold rounded uppercase tracking-tighter">
+                        {p.replace('_', ' ')}
+                      </span>
+                    ))
+                  )}
+                  {!role.permissions?.includes('*') && (role.permissions ?? []).length > 6 && (
+                    <span className="px-2 py-0.5 bg-gray-50 text-brand-slate text-[9px] font-bold rounded uppercase tracking-tighter">
+                      +{(role.permissions ?? []).length - 6} more
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           ))}
         </div>
       )}
 
-      {modal && <RoleModal role={modal === 'new' ? null : modal} onClose={() => setModal(null)} onSaved={() => { setModal(null); load() }} />}
-    </>
+      {modal && (
+        <RoleModal 
+          role={modal === 'new' ? null : modal} 
+          onClose={() => setModal(null)} 
+          onSaved={() => { setModal(null); load() }} 
+        />
+      )}
+    </div>
   )
 }

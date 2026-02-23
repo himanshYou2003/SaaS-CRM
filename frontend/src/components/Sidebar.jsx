@@ -18,30 +18,42 @@ export default function Sidebar() {
   const { user, logout } = useAuth()
 
   return (
-    <nav className="sidebar">
-      <div className="sidebar-logo">
-        <Zap size={22} />
-        SaaS CRM
+    <nav className="fixed left-0 top-0 bottom-0 w-64 bg-white border-r border-[#E5E7EB] flex flex-col py-6 z-50">
+      <div className="px-6 mb-8 flex items-center gap-2 text-brand-green">
+        <div className="bg-brand-green/10 p-2 rounded-lg">
+          <Zap size={20} className="fill-current" />
+        </div>
+        <span className="text-xl font-bold tracking-tight text-brand-dark">DocMonitoring</span>
       </div>
 
-      {NAV.map(({ to, icon: Icon, label }) => (
-        <NavLink
-          key={to}
-          to={to}
-          end={to === '/'}
-          className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
-        >
-          <Icon size={17} />
-          {label}
-        </NavLink>
-      ))}
+      <div className="px-3 flex-1 flex flex-col gap-1">
+        {NAV.map(({ to, icon: Icon, label }) => (
+          <NavLink
+            key={to}
+            to={to}
+            end={to === '/'}
+            className={({ isActive }) => `
+              flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 group
+              ${isActive 
+                ? 'bg-brand-green text-white shadow-md' 
+                : 'text-brand-slate hover:bg-gray-50 hover:text-brand-dark'}
+            `}
+          >
+            <Icon size={18} className={`${({ isActive }) => isActive ? 'text-white' : 'text-brand-slate group-hover:text-brand-green'}`} />
+            <span className="font-medium text-sm">{label}</span>
+          </NavLink>
+        ))}
+      </div>
 
-      <div style={{ marginTop: 'auto', padding: '0 20px' }}>
-        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: 10 }}>
-          <div style={{ fontWeight: 600, color: 'var(--text)' }}>{user?.name}</div>
-          <div>{user?.email}</div>
+      <div className="mt-auto px-4 pt-6 border-t border-gray-100 flex flex-col gap-4">
+        <div className="px-2">
+          <div className="text-sm font-semibold text-brand-dark truncate">{user?.name}</div>
+          <div className="text-xs text-brand-slate truncate">{user?.email}</div>
         </div>
-        <button className="btn btn-ghost btn-sm" style={{ width: '100%' }} onClick={logout}>
+        <button 
+          className="btn-ghost w-full justify-center text-red-500 border-red-100 hover:bg-red-50 hover:text-red-600" 
+          onClick={logout}
+        >
           <LogOut size={14} /> Logout
         </button>
       </div>

@@ -79,6 +79,7 @@ class DealSeeder extends Seeder
                     . '. ' . self::$NOTES[array_rand(self::$NOTES)],
                 'contact_id' => !empty($contactIds) ? $contactIds[array_rand($contactIds)] : null,
                 'lead_id' => !empty($leadIds) ? $leadIds[array_rand($leadIds)] : null,
+                'assigned_to' => (string) $user->_id,
             ]);
         }
 

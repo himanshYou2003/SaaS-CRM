@@ -14,9 +14,9 @@ function PrivateLayout() {
   const { user } = useAuth()
   if (!user) return <Navigate to="/login" replace />
   return (
-    <div className="app-shell">
+    <div className="flex min-h-screen bg-brand-surface font-sans">
       <Sidebar />
-      <div className="main-content">
+      <main className="flex-1 ml-64 p-8 max-w-[1600px] mx-auto w-full transition-all duration-300">
         <Routes>
           <Route path="/"            element={<Dashboard />} />
           <Route path="/leads"       element={<Leads />} />
@@ -26,7 +26,7 @@ function PrivateLayout() {
           <Route path="/tokens"      element={<Tokens />} />
           <Route path="*"            element={<Navigate to="/" replace />} />
         </Routes>
-      </div>
+      </main>
     </div>
   )
 }

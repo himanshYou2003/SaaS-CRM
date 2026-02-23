@@ -199,7 +199,7 @@ async function main() {
     email: EMAIL,
     password: PASSWORD,
   });
-  const token = authData?.token;
+  const token = authData?.token; const userId = authData?.user?.id || authData?.user?._id;
   if (!token) throw new Error("Login failed — no token returned");
   console.log(`✅  Logged in. Token: ${token.slice(0, 20)}…\n`);
 
@@ -396,6 +396,7 @@ async function main() {
       title: dealTitles[i],
       stage,
       amount: randFloat(10000, 500000),
+      assigned_to: userId,
       currency: "INR",
       probability: rand(10, 95),
       expected_close_date: futureDate(rand(7, 90)),
