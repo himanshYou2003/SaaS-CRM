@@ -33,18 +33,18 @@ class AnalyticsService
                     '$match' => [
                         'company_id' => $companyId,
                         'stage' => 'closed_won',
-                        'closed_at' => [
+                        'created_at' => [
                             '$gte' => new \MongoDB\BSON\UTCDateTime(
                                 now()->startOfYear()->getTimestampMs()
-                            )
+                            ),
                         ],
                     ]
                 ],
                 [
                     '$group' => [
                         '_id' => [
-                            'year' => ['$year' => '$closed_at'],
-                            'month' => ['$month' => '$closed_at'],
+                            'year' => ['$year' => '$created_at'],
+                            'month' => ['$month' => '$created_at'],
                         ],
                         'total_revenue' => ['$sum' => '$amount'],
                         'deal_count' => ['$sum' => 1],
@@ -106,7 +106,7 @@ class AnalyticsService
                 'total' => $total,
                 'won' => $won,
                 'conversion_rate' => $total > 0 ? round(($won / $total) * 100, 2) : 0,
-                'by_status' => $byStatus,
+                'by_status' => empty($byStatus) ? (object) [] : $byStatus,
             ];
         });
     }

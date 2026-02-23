@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
@@ -14,7 +15,7 @@ use Illuminate\Support\Collection;
  */
 abstract class BaseRepository
 {
-    protected Model $model;
+    protected EloquentModel $model;
 
     public function __construct()
     {
